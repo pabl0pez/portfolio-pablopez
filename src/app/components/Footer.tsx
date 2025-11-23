@@ -12,7 +12,7 @@ export default function Footer() {
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-3 h-3 bg-[#00CAFF] rounded-full animate-pulse"></div>
               <span className="text-white font-bold text-xl bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent">
-                PORTFOLIO
+                JUAN PABLO LÓPEZ
               </span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
@@ -59,8 +59,8 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4 text-lg">Get In Touch</h3>
             <ul className="space-y-2">
               <li className="text-gray-400">your.email@example.com</li>
-              <li className="text-gray-400">+1 (555) 123-4567</li>
-              <li className="text-gray-400">Based in Your City</li>
+              <li className="text-gray-400">+57 3016973283</li>
+              <li className="text-gray-400">Armenia, Quindío - COLOMBIA</li>
             </ul>
           </div>
         </div>
@@ -71,16 +71,8 @@ export default function Footer() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm">
-              © {currentYear} Your Name. All rights reserved.
+              © {currentYear} - Juan Pablo López Gómez
             </p>
-            <div className="flex space-x-6 mt-2 md:mt-0">
-              <a href="#" className="text-gray-500 hover:text-[#00CAFF] text-sm transition-colors duration-300">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-gray-500 hover:text-[#00CAFF] text-sm transition-colors duration-300">
-                Terms of Service
-              </a>
-            </div>
           </div>
         </div>
       </div>

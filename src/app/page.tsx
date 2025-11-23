@@ -1,6 +1,20 @@
-'use client'; // 👈 AÑADE ESTO
+'use client';
+
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const roles = [
+    'Software Engineer',
+    'Fullstack Developer', 
+    'Software Architect',
+    'UI Designer',
+    'Game Developer'
+  ];
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -10,6 +24,33 @@ export default function Home() {
       });
     }
   };
+
+  useEffect(() => {
+    const currentRole = roles[currentIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Escribiendo
+        if (displayText.length < currentRole.length) {
+          setDisplayText(currentRole.substring(0, displayText.length + 1));
+        } else {
+          // Esperar antes de empezar a borrar
+          setTimeout(() => setIsDeleting(true), 1500);
+        }
+      } else {
+        // Borrando
+        if (displayText.length > 0) {
+          setDisplayText(displayText.substring(0, displayText.length - 1));
+        } else {
+          // Cambiar al siguiente rol
+          setIsDeleting(false);
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
+        }
+      }
+    }, isDeleting ? 50 : 100); // Más rápido al borrar
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentIndex, roles]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -27,17 +68,18 @@ export default function Home() {
             <span className="text-sm text-[#00CAFF] font-semibold">AVAILABLE FOR WORK</span>
           </div>
 
-          {/* Título principal */}
+          {/* Título principal con animación */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="text-white">Welcome,</span>
+            <span className="text-white">I'm Juan Pablo López</span>
             <br />
             <span className="bg-gradient-to-r from-[#4300FF] via-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent">
-              I'm Juan Pablo López
+              {displayText}
+              <span className="animate-pulse">|</span>
             </span>
           </h1>
           
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Full Stack Developer specializing in modern web technologies and creating exceptional digital experiences.
+            Creative developer passionate about building innovative digital solutions and exceptional user experiences.
           </p>
 
           {/* Botones */}
@@ -61,7 +103,7 @@ export default function Home() {
       {/* Sección About */}
       <section id="about" className="min-h-screen flex items-center justify-center py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent pb-2">
             About Me
           </h2>
           <div className="max-w-2xl mx-auto">
@@ -78,9 +120,11 @@ export default function Home() {
       {/* Sección Skills */}
       <section id="skills" className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-b from-black to-[#4300FF]/5">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent">
-            My Skills
-          </h2>
+          <div className="mb-12 pt-8">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent inline-block pb-3">
+              My Skills
+            </h2>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS', 'PostgreSQL'].map((skill) => (
               <div key={skill} className="bg-white/5 rounded-lg p-4 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-colors">
@@ -94,9 +138,11 @@ export default function Home() {
       {/* Sección Projects */}
       <section id="projects" className="min-h-screen flex items-center justify-center py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent">
-            My Projects
-          </h2>
+          <div className="mb-12 pt-8">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent inline-block pb-3">
+              My Projects
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Project 1 */}
             <div className="bg-white/5 rounded-xl p-6 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-all duration-300 hover:scale-105">
@@ -146,7 +192,7 @@ export default function Home() {
       {/* Sección Contact */}
       <section id="contact" className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-t from-black to-[#00CAFF]/5">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent pb-2">
             Contact Me
           </h2>
           
