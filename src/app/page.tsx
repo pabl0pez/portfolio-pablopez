@@ -152,22 +152,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección About */}
+      {/* Sección About Me con Imagen - TEXTO ORIGINAL MANTENIDO */}
       <section id="about" className="min-h-screen flex items-center justify-center py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent pb-2">
-            About Me
-          </h2>
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg text-gray-300 mb-4">
-              I'm a Colombian developer and a 7th-semester Systems and Computing Engineering student, passionate about creating software that delivers real value. 
-            </p>
-            <p className="text-lg text-gray-300">
-              Discipline and consistency are my strongest assets: when everyone else gives their best, I keep pushing forward driven by my vocation and genuine love for technology.
-            </p>
-            <p className="text-lg text-gray-300">
-              I'm motivated by building, learning, and contributing to solutions that make an impact.
-            </p>
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+            
+            {/* Imagen Circular - Lado Izquierdo */}
+            <div className="flex-shrink-0 w-full lg:w-1/3 flex justify-center lg:justify-start">
+              <div className="relative">
+                {/* Efecto de glow exterior */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] rounded-full blur-lg opacity-30 animate-pulse"></div>
+                
+                {/* Contorno animado */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] rounded-full animate-spin-slow">
+                  <div className="absolute inset-2 bg-black rounded-full"></div>
+                </div>
+                
+                {/* Imagen principal */}
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-black bg-gradient-to-br from-[#4300FF]/20 to-[#00CAFF]/20">
+                  <img 
+                    src="/images/imagePortfolio.webp"
+                    alt="Juan Pablo López"
+                    className="w-full h-full object-cover scale-125 hover:scale-130 transition-transform duration-500" // ← Cambios aquí
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  
+                  {/* Placeholder si no hay imagen */}
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#4300FF]/10 to-[#00CAFF]/10">
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">👨‍💻</div>
+                      <p className="text-gray-400 text-sm">Tu foto aquí</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Elementos decorativos */}
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#00CAFF] rounded-full blur-sm opacity-60"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-[#4300FF] rounded-full blur-sm opacity-60"></div>
+              </div>
+            </div>
+
+            {/* Texto - Lado Derecho - TEXTO ORIGINAL MANTENIDO */}
+            <div className="w-full lg:w-2/3 text-center lg:text-left">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent pb-2 inline-block">
+                About Me
+              </h2>
+              
+              <div className="space-y-6">
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  I'm a Colombian developer and a 7th-semester Systems and Computing Engineering student, passionate about creating software that delivers real value. 
+                </p>
+                
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  Discipline and consistency are my strongest assets: when everyone else gives their best, I keep pushing forward driven by my vocation and genuine love for technology.
+                </p>
+
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  I'm motivated by building, learning, and contributing to solutions that make an impact.
+                </p>
+
+                {/* Stats o información adicional - OPCIONAL */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+                  <div className="bg-white/5 rounded-lg p-4 border border-[#4300FF]/20">
+                    <div className="text-2xl font-bold text-[#00CAFF]">+2</div>
+                    <div className="text-gray-400 text-sm">Years of Experience</div>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4 border border-[#4300FF]/20">
+                    <div className="text-2xl font-bold text-[#00CAFF]">Colombian</div>
+                    <div className="text-gray-400 text-sm">Engineer</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -402,6 +460,19 @@ export default function Home() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
         }
       `}</style>
     </div>
