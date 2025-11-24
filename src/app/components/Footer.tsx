@@ -12,11 +12,11 @@ export default function Footer() {
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-3 h-3 bg-[#00CAFF] rounded-full animate-pulse"></div>
               <span className="text-white font-bold text-xl bg-gradient-to-r from-[#00CAFF] to-[#4300FF] bg-clip-text text-transparent">
-                JUAN PABLO LÓPEZ
+                JUAN PABLO LÓPEZ GÓMEZ
               </span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
-              Full Stack Developer specializing in modern web technologies and creating exceptional digital experiences.
+              Thank you for viewing my portfolio. Any suggestions or proposals can be sent to the email in the contact section.
             </p>
             <div className="flex space-x-4">
               {/* Social Links */}
@@ -58,8 +58,8 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4 text-lg">Get In Touch</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">your.email@example.com</li>
-              <li className="text-gray-400">+57 3016973283</li>
+              <li className="text-gray-400">pablo.lopez.g2005@gmail.com</li>
+              <li className="text-gray-400">(+57) 301 697 3283</li>
               <li className="text-gray-400">Armenia, Quindío - COLOMBIA</li>
             </ul>
           </div>

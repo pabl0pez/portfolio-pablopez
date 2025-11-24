@@ -19,7 +19,7 @@ export default function Header() {
     const element = document.getElementById(sectionId);
     if (element) {
       window.scrollTo({
-        top: element.offsetTop - 80,
+        top: element.offsetTop - 12,
         behavior: 'smooth'
       });
       setIsMobileMenuOpen(false); // Cerrar menú móvil después de click
