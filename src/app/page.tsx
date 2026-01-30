@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { projects } from '../lib/data/projects';
+import Link from 'next/link';
 
 // Definimos los tipos para las skills
 interface SkillCategory {
@@ -152,7 +154,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección About Me con Imagen - TEXTO ORIGINAL MANTENIDO */}
+      {/* Sección About Me con Imagen*/}
       <section id="about" className="min-h-screen flex items-center justify-center py-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
@@ -173,7 +175,7 @@ export default function Home() {
                   <img 
                     src="/images/imagePortfolio.webp"
                     alt="Juan Pablo López"
-                    className="w-full h-full object-cover scale-125 hover:scale-130 transition-transform duration-500" // ← Cambios aquí
+                    className="w-full h-full object-cover scale-125 hover:scale-130 transition-transform duration-500" 
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
@@ -319,56 +321,105 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección Projects */}
+      {/* Sección Projects CORREGIDA */}
       <section id="projects" className="min-h-screen flex items-center justify-center py-20">
         <div className="container mx-auto px-6 text-center">
           <div className="mb-12 pt-8">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#4300FF] to-[#00CAFF] bg-clip-text text-transparent inline-block pb-3">
               My Projects
             </h2>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              A selection of my recent work. Each project represents unique challenges and innovative solutions.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Project 1 */}
-            <div className="bg-white/5 rounded-xl p-6 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-all duration-300 hover:scale-105">
-              <div className="w-full h-48 bg-gradient-to-br from-[#4300FF]/20 to-[#00CAFF]/20 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-white/60 text-lg">Project Image</span>
-              </div>
-              <h3 className="text-white font-bold text-xl mb-2">E-Commerce Platform</h3>
-              <p className="text-gray-400 mb-4">Full-stack e-commerce solution with modern features</p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">React</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">Node.js</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">MongoDB</span>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="bg-white/5 rounded-xl p-6 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-all duration-300 hover:scale-105">
-              <div className="w-full h-48 bg-gradient-to-br from-[#4300FF]/20 to-[#00CAFF]/20 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-white/60 text-lg">Project Image</span>
-              </div>
-              <h3 className="text-white font-bold text-xl mb-2">Task Management App</h3>
-              <p className="text-gray-400 mb-4">Productivity app with real-time collaboration</p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">Next.js</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">TypeScript</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">PostgreSQL</span>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="bg-white/5 rounded-xl p-6 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-all duration-300 hover:scale-105">
-              <div className="w-full h-48 bg-gradient-to-br from-[#4300FF]/20 to-[#00CAFF]/20 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-white/60 text-lg">Project Image</span>
-              </div>
-              <h3 className="text-white font-bold text-xl mb-2">Weather Dashboard</h3>
-              <p className="text-gray-400 mb-4">Real-time weather data visualization</p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">Vue.js</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">Express</span>
-                <span className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-sm">API</span>
-              </div>
-            </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Project Cards dinámicas CON IMÁGENES REALES */}
+            {projects.slice(0, 3).map((project) => (
+              <Link
+                key={project.id}
+                href={`/projects/${project.id}`}
+                className="group bg-white/5 rounded-xl p-6 border border-[#4300FF]/20 hover:border-[#00CAFF]/40 transition-all duration-300 hover:scale-105 block"
+              >
+                {/* Imagen del proyecto - VERSIÓN CORREGIDA */}
+                <div className="w-full h-48 rounded-lg mb-4 overflow-hidden relative">
+                  <img 
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      console.error(`Error cargando imagen: ${project.image}`);
+                      e.currentTarget.style.display = 'none';
+                      // Muestra placeholder si falla
+                      const placeholder = e.currentTarget.nextElementSibling;
+                      if (placeholder) placeholder.classList.remove('hidden');
+                    }}
+                    onLoad={() => console.log(`Imagen cargada: ${project.title}`)}
+                  />
+                  
+                  {/* Placeholder que se muestra solo si la imagen falla */}
+                  <div className="hidden absolute inset-0 bg-gradient-to-br from-[#4300FF]/20 to-[#00CAFF]/20 flex flex-col items-center justify-center">
+                    <div className="text-4xl mb-2">
+                      {project.id === 'snugplace' ? '🏠' : 
+                       project.id === 'colabedu' ? '🎓' : '💻'}
+                    </div>
+                    <span className="text-white/70 text-sm">{project.title}</span>
+                    <span className="text-white/50 text-xs mt-1">Project Preview</span>
+                  </div>
+                  
+                  {/* Overlay para efecto hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                
+                {/* Contenido */}
+                <h3 className="text-white font-bold text-xl mb-2 text-left">
+                  {project.title}
+                </h3>
+                <p className="text-gray-400 mb-4 text-left text-sm">
+                  {project.shortDescription}
+                </p>
+                
+                {/* Tecnologías */}
+                <div className="flex flex-wrap gap-2 mb-4 justify-start">
+                  {project.technologies.slice(0, 3).map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-[#4300FF]/20 text-[#00CAFF] px-3 py-1 rounded-full text-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <span className="bg-black/40 text-gray-400 px-3 py-1 rounded-full text-xs">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
+                </div>
+                
+                {/* Botón */}
+                <div className="flex items-center justify-between mt-4">
+                  <span className="text-[#00CAFF] text-sm font-medium">
+                    View Details
+                  </span>
+                  <span className="text-[#00CAFF] transform group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          
+          {/* Botón para ver todos los proyectos */}
+          <div className="mt-12">
+            <Link
+              href="/projects"
+              className="inline-flex items-center px-8 py-3 border-2 border-[#4300FF] text-white font-semibold rounded-lg hover:bg-[#4300FF]/10 transition-colors duration-300"
+            >
+              View All Projects
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -389,7 +440,7 @@ export default function Home() {
               <div className="bg-white/5 rounded-lg p-6 border border-[#4300FF]/20">
                 <div className="text-[#00CAFF] text-2xl mb-2">📧</div>
                 <h3 className="text-white font-semibold mb-2">Email</h3>
-                <p className="text-gray-400">pablo.lopez.g2005@gmail.com</p>
+                <p className="text-gray-400">pablopez.contact@gmail.com</p>
               </div>
               
               <div className="bg-white/5 rounded-lg p-6 border border-[#4300FF]/20">
